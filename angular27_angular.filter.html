@@ -1,0 +1,78 @@
+<!-- angular.filter ==> It is an angular function used to apply filters dynamically to any content -->
+
+<html lang="en">
+<head>
+    <style>
+        *{
+            font-family: "Comic Sans MS", sans-serif;
+            text-align: start;
+        }
+        fieldset{
+            font-weight: bold;
+            border: 2px solid #802b1d;
+            box-shadow: 0 0 5px black;
+            margin: auto;
+            width: 500px;
+            padding: 50px;
+            background: linear-gradient(lightpink,lightseagreen);
+        }
+        div{
+            position: fixed;
+            top: 20%;
+            left: 5%;
+            margin-top: -80px;
+        }
+        legend{
+            padding-top: 20px;
+        }
+        button{
+            color: white;
+            border-radius: 10px;
+            background-color:dodgerblue  ;
+            border-color: lightblue;
+            height: 40px;
+            width: 110px;
+            text-align: center;
+            border-style: outset;
+        }
+        input{
+            border: 2px solid #7c8b65;
+            height: 40px;
+            font-size: 20px;
+            background-color: lightgray;
+            color: black;
+            border-radius: 4px;
+        }
+        span{
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+        }
+    </style>
+    <title>angular.filter</title>
+    <script src="vendors/angular.js" ></script>
+    <script>
+        var app = angular.module("FilterApp", []);
+        app.controller("HomeController", function ($scope, $filter) {
+
+               $scope.changeCase =  function () {
+                   $scope.case= $filter('uppercase')($scope.msg);
+                   var txt_box =  document.querySelector('input[type=text]');
+                   txt_box.value=" ";
+               }
+            }
+        )
+    </script>
+</head>
+<body ng-app="FilterApp" ng-controller="HomeController">
+<div >
+    <fieldset >
+        <legend>Dynamic Angular Filter</legend>
+
+            <input type="text" ng-model="msg">&nbsp;
+            <button ng-click="changeCase()">Change Case</button><br>
+        <span >{{case}}</span>
+    </fieldset>
+</div>
+</body>
+</html>

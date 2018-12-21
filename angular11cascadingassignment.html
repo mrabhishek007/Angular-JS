@@ -1,0 +1,240 @@
+<!-- Display cascading drop down load in online movie ticket system -->
+
+<html lang="en">
+<head>
+    <title>Drop Down Assignment</title>
+    <script src="vendors/angular.js"></script>
+    <style>
+        
+        body{
+            background-color: ghostwhite;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        caption{
+            color:green;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        var app = angular.module("MyApp",[]) ; 
+        app.controller("MyController",function($scope){
+
+            $scope.citySelected = "";
+            $scope.cinemaOptions = [] ;
+            $scope.cinemaSelected = "";
+            $scope.movieOptions = [];
+            $scope.movieSelected = "";
+            $scope.showTiming= [];
+            $scope.seatSelected= "";
+            $scope.moviePic="" ;
+            $scope.totalSeats="";
+            $scope.showTimeSelected="";
+            $scope.ticketPrice="";
+            $scope.isHide="";
+            $scope.getMovieDetails = function(){
+                switch($scope.movieName){
+                    case "X-man":
+                       $scope.moviePic =  $scope.movieInfo[0].poster;
+                        break;
+
+                    case "Ant-man":
+                        $scope.moviePic =  $scope.movieInfo[1].poster;
+                        break;
+
+                    case "Nirahua Patna wala":
+                        $scope.moviePic =   $scope.movieInfo[2].poster;
+                        break;
+
+                    case "Despicable Me 2":
+                        $scope.moviePic =   $scope.movieInfo[3].poster;
+                        break;    
+                }
+            };
+
+            $scope.movieInfo = [
+                {Name:"X-man",poster:"img/xman.jpg"},
+                {Name:"Ant-Man",poster:"img/antman.jpg"},   
+               {Name:"Nirahua Patna wala",poster:"img/nirahua.jpg"},
+               {Name:"Despicable Me 2",poster:"img/dm2.jpg"}, 
+                               ]
+
+
+            $scope.cities = ['Delhi','Patna']  ;
+         
+            $scope.delhiCinema = ['Karol Bag','Rajeev Chawok'];
+            $scope.patnaCinema = ['RajendraNagar','GandhiMaidan'];
+         
+            $scope.karolBagMovies = ['X-man','Ant-man'];
+            $scope.rajeevChawokMovies = ['Ant-man','Despicable Me 2'];
+            $scope.rajendraNagarMovies = ['Ant-man','X-man'];
+            $scope.gandhiMaidanMovies = ['Ant-man','Nirahua Patna wala'];
+
+            $scope.showTiming1 = ["09:00 am","12:00pm","04.00pm"]
+            $scope.showTiming2 = ["11:00 am","2:00pm","06.00pm"]
+            $scope.showTiming3 = ["08:30 am","4:00pm","09.00pm"]
+    
+            
+            $scope.setCity = function(){
+                $scope.isHide=true;
+                switch($scope.citySelected){
+                    case "Delhi":
+                        $scope.cinemaOptions = $scope.delhiCinema ; 
+                        break;
+                    case "Patna":
+                        $scope.cinemaOptions = $scope.patnaCinema ; 
+                        break;
+                }
+            }
+            $scope.setCinema = function(){
+                $scope.isHide=true;
+                switch($scope.cinemaSelected){
+                    case "Karol Bag":
+                        $scope.movieOptions = $scope.karolBagMovies ; 
+                        break;
+                    case "Rajeev Chawok":
+                        $scope.movieOptions = $scope.rajeevChawokMovies ; 
+                        break;
+                    case "RajendraNagar":
+                        $scope.movieOptions = $scope.rajendraNagarMovies ; 
+                        break;
+                    case "GandhiMaidan":
+                        $scope.movieOptions = $scope.gandhiMaidanMovies ; 
+                        break;                       
+                }   
+            }
+
+            $scope.setMovie = function(){
+                $scope.isHide=true;
+                if($scope.movieSelected==="X-man" && $scope.cinemaSelected==="Karol Bag"){
+                    $scope.showTiming = $scope.showTiming1 ;
+                }else if($scope.movieSelected==="Ant-man" && $scope.cinemaSelected=="Karol Bag"){
+                    $scope.showTiming = $scope.showTiming3 ;
+                }else if($scope.movieSelected==="Ant-man" && $scope.cinemaSelected=="Rajeev Chawok"){
+                    $scope.showTiming = $scope.showTiming2 ;
+                }else if($scope.movieSelected==="Despicable Me 2" && $scope.cinemaSelected=="Rajeev Chawok"){
+                    $scope.showTiming = $scope.showTiming1 ;
+                }else if($scope.movieSelected==="Ant-man" && $scope.cinemaSelected=="RajendraNagar"){
+                    $scope.showTiming = $scope.showTiming3 ;
+                }else if($scope.movieSelected==="X-man" && $scope.cinemaSelected=="RajendraNagar"){
+                    $scope.showTiming = $scope.showTiming1 ;
+                }else if($scope.movieSelected==="Nirahua Patna wala" && $scope.cinemaSelected=="GandhiMaidan"){
+                    $scope.showTiming = $scope.showTiming3 ;
+                }else if($scope.movieSelected==="Ant-man" && $scope.cinemaSelected=="GandhiMaidan"){
+                    $scope.showTiming = $scope.showTiming2 ;
+                }
+            }
+
+            $scope.setSeatClass = function(){
+                $scope.isHide=true;
+                $scope.seatType = ['Platinum','Gold','Silver'] ; 
+            } ;
+
+            $scope.getPrice = function(){
+                switch($scope.seatSelection){
+                    case "Platinum":$scope.ticketPrice = 300;break;
+                    case "Gold":$scope.ticketPrice = 240;break;
+                    case "Silver":$scope.ticketPrice = 150;break;
+                }                          
+            }
+
+
+
+            $scope.bookTicket = function(){
+                $scope.movieName = $scope.movieSelected ;
+                $scope.getMovieDetails();
+                $scope.movieImg = $scope.moviePic;
+                $scope.loc = $scope.cinemaSelected;
+                $scope.timing = $scope.showTimeSelected;
+                $scope.seats = $scope.totalSeats;
+                $scope.seatSelection = $scope.seatSelected;
+                $scope.getPrice();
+                $scope.totalAmount = ($scope.seats*$scope.ticketPrice) ;
+                $scope.isHide=false; 
+                
+            
+            }
+
+        }) ; 
+    </script>
+</head>
+<body ng-app="MyApp" ng-controller="MyController" ng-init="isHide=true">
+    <table width="500" border="1" cellspacing="2" cellpadding="3" style="float: left" >
+        <caption align="center"> <b>Online Movie Ticket Booking </b></caption>
+        
+        <tr>
+            <td>
+                Select Your city<br>
+                <select ng-model="citySelected" ng-options="city for city in cities" ng-change="setCity()" ></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Select Cinema<br>
+                <select ng-model="cinemaSelected" ng-options="cinema for cinema in cinemaOptions" ng-change="setCinema()"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Select Movie<br>
+                <select ng-options="movie for movie in movieOptions" ng-model="movieSelected" ng-change="setMovie()"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Select Timings<br>
+                <select ng-options="timing for timing in showTiming" ng-model="showTimeSelected" ng-change="setSeatClass()"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Select Class<br>
+                <select ng-options="seat for seat in seatType" ng-model="seatSelected" ng-change="isHide=true"></select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Seats<br>
+                 <input type="number" max="5" min="1" value="1" ng-change="isHide=true" ng-model="totalSeats"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Book Now" ng-click="bookTicket()" >
+            </td>
+        </tr>
+    </table>
+
+        <!-- Booking Summary -->
+
+       <table width="400" border="2" cellspacing="3" cellpadding="3" style="float: left;margin-left: 100" ng-hide="isHide">
+            <caption align="center"> <b>Booking Details </b></caption>
+            <tr>
+                <td align="center">
+                    Movie Name : <span style="margin-left:10">{{movieName}}</span> 
+                </td>
+            </tr>
+
+            <tr>
+               <td>
+                  <img ng-src="{{movieImg}}" width="300" height="240" style="margin: 20">
+               </td>
+            </tr>
+
+            <tr>
+                <td align="center">
+                    {{timing}} at {{loc}}<br><br>
+                    <span> Seat Type : {{seatSelection}} </span><br><br>
+                    <span> total Seats : {{seats}} </span><br><br>
+                    <span> Total Amount : &#8377; {{totalAmount}} </span>
+                </td>
+            </tr>
+                        
+       </table>
+
+</body>
+</html>

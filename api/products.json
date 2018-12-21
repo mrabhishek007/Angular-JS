@@ -1,0 +1,18 @@
+[
+  {
+    "id":1,
+    "Name":"Samsung TV",
+    "Price":35000.59
+  },
+  {
+    "id":2,
+    "Name":" Nike Shoe",
+    "Price":4700.95
+  },
+  {
+    "id":3,
+    "Name":" Google Pixel",
+    "Price":49000.5
+  }
+
+]

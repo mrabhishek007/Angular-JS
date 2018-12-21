@@ -1,0 +1,92 @@
+<!-- Dynamic sorting with fieldname as sort expression from a hyperlink -->
+<!-- First Click  => Order , Second Click => Reverse  -->
+
+<html lang="en">
+<head>
+    <title>Sorting using Hyperlink</title>
+    <style>
+            *{
+             font-family: Helvetica Neue, arial;
+             }
+    </style>
+    <title>Dynamic Sorting</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+    var app = angular.module("DemoApp",[]);
+    app.controller("MyController",function($scope){
+
+        
+        $scope.products=[
+            {
+                id:1,
+                name:"Samsung Tv",
+                price:3500.56,
+                mfd:new Date("2014/07/22"),
+                photo:"img/tv.jpg"
+            },
+            {
+                id:3,
+                name:"Car",
+                price:15000000.36,
+                mfd:new Date("2018/01/22"),
+                photo:"img/car2.jpg"
+            },
+            {
+                id:2,
+                name:"Shoe",
+                price:1533.95,
+                mfd:new Date("2015/03/06"),
+                photo:"img/shoe.jpg"
+            },            
+        ];
+
+
+
+    $scope.fieldname = "id" ;     
+    $scope.reverse = false ;     
+    $scope.sort = function(fieldname){
+        
+        if($scope.fieldname===fieldname){   /* If th will be clicked twice then changing it to descending order */
+            $scope.reverse = !$scope.reverse ;
+        }else{
+            $scope.fieldname = fieldname ;
+            $scope.reverse = false;
+        }
+    }
+
+    });   
+</script>
+</head>
+
+<body ng-app="DemoApp" ng-controller="MyController">
+
+    <table width="600" border="1" cellpadding="5"  cellspacing="5">
+        <tr>
+            <th>
+               <a href="" ng-click="sort('id')" >Product Id</a>
+            </th>
+            <th>
+               <a href="" ng-click="sort('name')" >Name</a>
+            </th>
+            <th>
+               <a href="" ng-click="sort('price')" >Price</a>
+            </th>
+            <th>
+                <a href="" ng-click="sort('mfd')">Manufactured</a>
+            </th>
+            <th>Preview</th>
+
+        </tr>
+
+        <tr ng-repeat="item in products | orderBy:fieldname:reverse">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price | currency :'&#8377;'}}</td>
+            <td>{{item.mfd | date}}</td>
+            <td><img ng-src="{{item.photo}}" width="150" height="150"></td>
+        </tr>
+
+    </table>
+
+</body>
+</html>

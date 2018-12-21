@@ -1,0 +1,49 @@
+<!--Access and display client studLoc details-->
+<!--$studLoc service => It is a service used to access the client studLoc and also manage the studLoc which includes url,serer,ip-address,protocol etc... -->
+
+<html lang="en">
+<head>
+
+    <style>
+        *{
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+
+    <title>$locationService</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("MyApp",[]) ; 
+        app.controller("HomeController",function($scope,$location){
+            $scope.url = $location.absUrl();
+            $scope.host = $location.host();
+            $scope.protocol = $location.protocol();
+            $scope.msg="";
+
+            switch ($scope.protocol) {
+                case "http":
+                    $scope.msg = "Page from webserver is not secured (http)";
+                    break;
+                case "file":
+                    $scope.msg = "Page is accessed from a file system";
+                    break;
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="MyApp" ng-controller="HomeController">
+    <h2>Client Location Details </h2>
+    <dl>
+        <dt>URL</dt>
+        <dd>{{url}}</dd><br>
+        <dt>Server Name/ip Address</dt>
+        <dd>{{host}}</dd><br>
+        <dt>Protocol</dt>
+        <dd>{{msg}}</dd><br>
+    </dl>
+
+</body>
+
+</html>

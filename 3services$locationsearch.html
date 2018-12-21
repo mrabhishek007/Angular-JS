@@ -1,0 +1,27 @@
+<!-- $studLoc.search() is a function used to get and set the query string  -->
+<!-- Step 1 - Add a file named Google.html -->
+
+<html lang="en">
+<head>
+    <title>$location.search()</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("MyController",function($scope,$location){
+
+            $scope.changeQueryString = function () {
+
+                //dynamically changing the url(querystring)
+
+                $location.search("txt_search","Angular_js") ;
+            }
+
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+<h2>Search Query</h2>
+<button ng-click="changeQueryString()">ChangeQueryString</button>
+</body>
+</html>

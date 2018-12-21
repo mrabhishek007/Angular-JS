@@ -1,0 +1,48 @@
+<!-- The attribute for directives are defined using "scope" :
+        directive.scope{ property : 'value' }-->
+
+<html lang="en">
+<head>
+    <style>
+        dt{
+            font-weight: bold;
+        }
+        dd{
+            color: grey;
+        }
+    </style>
+    <title>Custom Directive With Attribute</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app=angular.module("DirectiveAttributeApp",[]);
+
+        app.directive("ngProduct",function () {
+           var directive = {};
+           directive.template = `<dl>
+                                    <dt> Product Name : </dt>
+                                    <dd> {{product.Name}} </dd>
+                                    <dt> Price </dt>
+                                    <dd> {{ product.Price|currency :'&#8377 ' }} </dd>
+                                  </dl>` ;
+           directive.restrict = "E";
+           directive.scope={
+               product : ' = product '
+           }
+           return directive;
+        });
+
+        app.controller("HomeController",function ($scope) {
+           $scope.tv = {Name:"Samsung", Price:65000.5};
+           $scope.shoe={Name:"Nike Shoe", Price:5400}
+        });
+
+    </script>
+</head>
+
+<body ng-app="DirectiveAttributeApp" ng-controller="HomeController">
+<h2>Product Details</h2><br>
+<ng-product product="tv"></ng-product>
+<ng-product product="shoe"></ng-product>
+<ng-product product="{Name:'pixel',Price:25100}"></ng-product>
+</body>
+</html>

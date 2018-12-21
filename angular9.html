@@ -1,0 +1,16 @@
+<!-- ng-include => used to handle any html template dynamically into the page -->
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script src="vendors/angular.js"></script>
+</head>
+<body ng-app> 
+    <div align="center" ng-init="view='angular9login.html' ">
+        <h2>Nareshit | Home</h2>
+        <a href="">Login</a>
+        <a href="" >Register</a>
+        <br><br>
+        <div ng-include="view"></div>
+    </div>
+</body>
+</html>

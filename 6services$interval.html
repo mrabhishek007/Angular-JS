@@ -1,0 +1,50 @@
+<!-- $interval service is used to schedule the tasks so that they can be in memory and execute repeatedly at specified interval of time -->
+<!-- syntax = $interval(function,interval)   -->
+
+<html lang="en">
+<head>
+    <title>$interval</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+
+        app.controller("MyController",function($scope,$interval){
+            $scope.clock="" ;
+            var timeInterval="";
+
+            function timer(){
+                  timeInterval = $interval(function () {
+                        var time = new Date();
+                        $scope.clock = time.toLocaleTimeString() ;
+                    }
+                    ,1000) ;
+            };
+            timer();
+
+            $scope.startClock = function () {
+                timer();
+            }
+
+            $scope.stopClock = function () {
+                $interval.cancel(timeInterval);
+            }
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+
+<div align="center" style="font-weight: bold">
+    {{clock}}
+</div><br>
+
+<div align="center">
+    <button ng-click="startClock()">Start</button>
+</div><br>
+
+<div align="center">
+    <button ng-click="stopClock()">Stop</button>
+</div>
+
+</body>
+</html>

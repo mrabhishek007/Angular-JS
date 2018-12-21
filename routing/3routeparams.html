@@ -1,0 +1,80 @@
+<!--  RouteParameters => The parameters in the url are defined as querystring  -->
+<!-- Syntax => $routeProvider.when('/details/:id/:name', {templateUrl:'details.html'})   -->
+<!-- Access the above routeprovider using " $routeParams.id & $routeParams.name "   -->
+
+
+<html>
+<head>
+    <title>RouteParams</title>
+    <style>
+        *{
+            font-family: "Comic Sans MS";
+            color: white;
+        }
+
+        a{
+            color: yellow;
+        }
+        h2{
+            font-size: 23px;
+        }
+        table{
+            margin-top: 10%;
+            box-shadow: 0 0 10px black;
+            background-color: lightseagreen;
+        }
+    </style>
+
+    <script src="../vendors/angular.js"></script>
+    <script src="../vendors/angular-route.js"></script>
+    <script>
+        var app = angular.module("DemoApp",["ngRoute"]) ;
+        app.config(function ($routeProvider) {
+
+            $routeProvider
+                .when('/details/:id' ,{
+                    templateUrl:'products.html',
+                    controller:'DetailsController'
+                })
+        });
+
+        app.controller("HomeController",function ($scope,$http) {
+            $scope.products = [] ;
+            $http.get('../api/products.json')
+                .then(function (response) {
+                    $scope.products = response.data ;
+                })
+        });
+
+        app.controller("DetailsController",function ($scope,$routeParams) {
+           $scope.id =  $routeParams.id ; //It will provide querystring data
+
+            for(let i=0; i<$scope.products.length; i++){
+                if( $scope.id == $scope.products[i].id) {
+                   $scope.pdName = $scope.products[i].Name ;
+                   $scope.pdPrice = $scope.products[i].Price ;
+               }
+           }
+        });
+    </script>
+</head>
+
+<body ng-app="DemoApp" ng-controller="HomeController">
+
+<table align="center" width="600" border="1" rules="none" cellpadding="0">
+    <tr height="400">
+        <td width="200">
+            <ol >
+                <li ng-repeat="item in products">
+                   <a href="#!details/{{item.id}}"> {{item.Name}} </a>
+                </li>
+            </ol>
+        </td>
+        <td width="400" >
+            <ng-view align="center"></ng-view>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

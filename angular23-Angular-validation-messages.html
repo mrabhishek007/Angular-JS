@@ -1,0 +1,41 @@
+<!-- Angular-JS framework provides "angular-messages" library for validation.It is responsible for  identifying
+     the error in input field & display concerned error messages.the module 'ng-messages' provides following
+     directives : 1.ng-messages, 2.ng-message)  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Angular Validation Msg</title>
+    <script src="vendors/angular.js"></script>
+    <script src="vendors/angular-messages.js"></script>
+    <script>
+        var app = angular.module("DemoApp",["ngMessages"])
+    </script>
+
+</head>
+<body ng-app="DemoApp">
+
+<form name="frmHome" novalidate>
+    <dl>
+        <dt>User Name</dt>
+        <dd>
+            <input type="text" name="txtName" ng-model="txtName" ng-maxlength="14" ng-minlength="4" required>
+        <div ng-messages="frmHome.txtName.$error">
+            <span ng-message="required">Name Required</span>
+            <span ng-message="minlength">Name too Short</span>
+            <span ng-message="maxlength">Name too Long</span>
+        </div>
+        </dd>
+        <dt>Email</dt>
+        <dd>
+            <input type="email" name="txtEmail" ng-model="txtEnail" required>
+            <div ng-messages="frmHome.txtEmail.$error">
+                <span ng-message="required">Email Required</span>
+                <span ng-message="email">Invalid Email</span>
+            </div>
+        </dd>
+    </dl>
+</form>
+</body>
+</html>

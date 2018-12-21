@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <title>validation($error)</title>
+    <script src="vendors/angular.js"></script>
+</head>
+<body ng-app>
+   
+       <!-- ByUsing '$error' We can define individual error messages for each cases   -->
+
+    <form name="myForm">
+        Username : 
+        <input type="text" required ng-model="txtName" name="txtName" ng-maxlength="15" ng-minlength="4">
+        <span ng-show="myForm.txtName.$error.required">Name is required</span>
+        <span ng-show="myForm.txtName.$error.minlength">Name too Short</span> 
+        <span ng-show="myForm.txtName.$error.maxlength">Name too long</span> 
+    </form>
+    
+</body>
+</html>

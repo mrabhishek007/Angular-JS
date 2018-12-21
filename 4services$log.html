@@ -1,0 +1,36 @@
+<!--$log service => It is an angular service used to track the activities and client interactions in applications and log the message in a debugger   -->
+<!-- $log.warn,$log.debug,$log.info,$log.error are services used to monitor client activity (use google chrome debugger to watch log msg) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$log service</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app =angular.module("DemoApp",[]) ;
+        app.controller("HomeController",($scope,$log)=>{
+           $scope.msg = "";
+           $scope.name_txt="";
+           $scope.log = $log ;
+
+           $scope.checkName = ()=>{
+                if($scope.name_txt.length<4 || $scope.name_txt.length>15){
+                    $scope.msg = "Name 4 to 5 character only ";
+                    $scope.log.error('Name length is less than or greater then 15 character');
+                }else
+                {
+                    $scope.msg="" ;
+                    $scope.log.info('Name verified successfully')
+                }
+           }
+
+        });
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController">
+<span>Your Name : &nbsp;</span>
+<input type="text" ng-model="name_txt" ng-keyup="checkName()">
+{{ msg}}
+</body>
+</html>

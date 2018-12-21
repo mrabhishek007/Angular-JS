@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        dt{font-weight:bolder}
+    </style>
+    <script src="vendors/angular.js"></script>
+    <script>
+    var app = angular.module('DemoApp',[]);
+    app.controller('homeController',function ($scope) {
+        $scope.RegisterIsVisible=true;
+        $scope.txtId="";
+        $scope.txtName="";
+        $scope.txtPrice="";
+        $scope.txtMfd="";
+        $scope.optStock="";
+        $scope.sCity="";
+        $scope.DetailsIsVisible=false;
+
+        $scope.Register = function () {
+            $scope.RegisterIsVisible=false;
+            $scope.DetailsIsVisible=true;
+            $scope.id=$scope.txtId;
+            $scope.name=$scope.txtName;
+            $scope.price=$scope.txtPrice;
+            $scope.mfd=$scope.txtMfd;
+            $scope.stock=$scope.optStock;
+            $scope.city=$scope.sCity;
+        }
+    }) ;
+    </script>
+</head>
+
+<body ng-app="DemoApp" ng-controller="homeController">
+
+    <fieldset ng-show="RegisterIsVisible">  <!-- <fieldset> element is used to group several controls as well as labels (<label>) within a web form.-->
+        <legend>Register Product</legend>   <!-- <legend> element providing a label/title for the <fieldset> -->
+        <dl>
+            <dt>product Id </dt>
+            <dd><input type="number" min="1" max="5" ng-model="txtId"></dd>
+            <dt>Name</dt>
+            <dd><input type="text" ng-model="txtName"></dd>
+            <dt>Price</dt>
+            <dd><input type="range" min="1000" max="50000" ng-model="txtPrice"></dd>
+            <dt>Manufacture</dt>
+            <dd><input type="date" ng-model="txtMfd"> </dd>
+            <dt>Is in Stock</dt>
+            <dd><input type="radio" ng-model="optStock" name="stock" value="Available">yes
+            <input type="radio" ng-model="optStock" name="stock" value="Out of Stock">No
+            </dd>
+            <dt>Shipped To</dt>
+            <dd>
+                <select ng-model="sCity">
+                    <option value="Delhi">Delhi</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                </select>
+            </dd>
+        </dl><br>
+        <button ng-click="Register()">Register</button>
+    </fieldset>
+    <br>
+
+
+    <fieldset ng-show="DetailsIsVisible">
+        <legend>Product Details</legend>
+        <table border="1" width="500">
+            <tr>
+                <td>Product Id</td>
+                <td ><span ng-bind="id"></span></td>  <!--    Value can also be accessed with ng-bind or {{ }}     -->
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{name}}</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>{{price}}</td>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td>{{mfd | date}}</td>   <!-- 'date' is a filter, which is used to show the date only -->
+            </tr>
+            <tr>
+                <td>Is in Stock</td>
+                <td>{{stock}}</td>
+            </tr>
+            <tr>
+                <td>Shipped to</td>
+                <td>{{city}}</td>
+            </tr>
+        </table>
+    </fieldset>
+    <br>
+    <a href="angular1.html" style="text-decoration: none">Register new product</a>
+
+</body>
+</html>

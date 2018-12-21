@@ -1,0 +1,43 @@
+<!-- $http data fetch-->
+<html lang="en">
+<head>
+    <title></title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        
+        app.controller("MyController",function($scope,$http){
+
+            $http({
+                method:'Get',
+                url:'angular9login.html'
+            })
+                .then(function onSucess(response) {
+                    $scope.data = response.data ;
+                    $scope.status = response.status;
+                    $scope.statusText = response.statusText;
+                },
+                function onFailed(response) {
+                    $scope.statusText = response.statusText ;
+                })
+
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+<dl>
+    <dt>Status Code</dt>
+    <dd>{{status}}</dd>
+    <dt>Status Code</dt>
+    <dd>{{statusText}}</dd>
+    <dt>Data</dt>
+    <dd>
+        <pre>
+            {{data}}
+        </pre>
+    </dd>
+
+</dl>
+</body>
+</html>

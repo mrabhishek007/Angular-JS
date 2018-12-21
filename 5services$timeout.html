@@ -1,0 +1,48 @@
+<!-- $timeout service => It is an angular service used to synchronize the tasks  -->
+<!-- Syntax ==> $timeout(function,interval); -->
+
+
+<html lang="en">
+<head>
+    <title>$timeout</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("MyController",function($scope,$timeout){
+
+            $scope.msg="Hello";
+
+            function getMessage1(){
+                $scope.msg = "How are you ?" ;
+            }
+
+            function getMessage2() {
+                $scope.msg = "Good luck learning Angular.."
+            }
+
+            var msg2 = $timeout(getMessage1,4000);
+
+            var msg3 = $timeout(getMessage2,8000);
+
+            $scope.cancelMsg2 = function () {
+                $timeout.cancel(msg2) ;
+                $scope.cancel_alert2=" 2nd Msg canceled!!"
+            }
+
+            $scope.cancelMsg3 = function () {
+                $timeout.cancel(msg3) ;
+                $scope.cancel_alert3=" 3rd Msg canceled!!"
+            }
+
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+
+    <h2>{{msg}}</h2>
+    <button ng-click="cancelMsg2()" >Cancel 2<sup>nd</sup> Message </button> &nbsp;&nbsp;{{cancel_alert2}}<br><br>
+        <button ng-click="cancelMsg3()" >Cancel 3<sup>rd</sup> Message </button> &nbsp;&nbsp;{{cancel_alert3}}
+
+</body>
+</html>

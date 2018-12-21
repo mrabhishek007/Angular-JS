@@ -1,0 +1,72 @@
+<!-- ng-src ( Used to define virtual path dynamically t0 any html element ) -->
+
+
+<!-- ng-repeat for a prototype to render -->
+
+<html lang="en">
+<head>
+    <title>ng-src</title>
+
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module('DemoApp',[]) ;
+
+        app.controller('HomeController', function($scope){
+
+            $scope.products =
+            [
+                {
+                    id:1,
+                    Name:'Samsung tv',
+                    price:5000.65,
+                    photo:'img/tv.jpg',
+                    shipped_to:['Delhi','Hyd','Ranchi']
+                    },
+                {
+                    id:2,
+                    Name:'Nike Shoe',
+                    price:6000.52,
+                    photo:'img/shoe.jpg',
+                    shipped_to:['Banglore','Delhi','Chennai']
+                }  
+            ];
+
+        }) ;
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController"> 
+    <h2 align="center" style="color:grey;" >Product Catalog </h2>
+    <table width="300" border="1"cellspacing="3" cellpadding="10" style="margin-left:15%">
+        <tr ng-repeat="item in products">
+            <td>
+               <img ng-src="{{item.photo}}" width="150" height="120"> 
+            </td>
+            <td>
+                <table align="center" frame="box" rules="all" >
+                     <tr>
+                        <td>Id</td>
+                        <td>{{item.id}}</td>
+                     </tr>
+                     <tr>
+                         <td>Name</td>
+                         <td>{{item.Name}}</td>
+                     </tr>
+                     <tr>
+                        <td>Price</td>
+                        <td>{{item.price}}</td>
+                     </tr>
+                     <tr>
+                         <td>Shipped to</td>
+                         <td  >
+                             <ol >
+                                 <li ng-repeat="city in item.shipped_to" >{{city}}</li>
+                             </ol>                           
+                         </td>
+                     </tr>                 
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

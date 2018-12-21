@@ -1,0 +1,60 @@
+<!--  Route with partial views and controllers  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Routing with partial_views</title>
+    <style>
+        *{
+            font-family: "Comic Sans MS", sans-serif;
+
+        }
+        .view{
+            color: #3276b1;
+        }
+        .header_footer{
+            background-color: darkslategrey;
+            color: white;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+        }
+
+    </style>
+
+    <script src="../vendors/angular.js"></script>
+    <script src="../vendors/angular-route.js"></script>
+    <script src="modules/demo_app.js"></script>  <!-- Load the demo_app first bcz angular need to be initialzed before controller-->
+    <script src="controller/home_controller.js"></script>
+    <script src="controller/about_controller.js"></script>
+    <script src="controller/contact_controller.js"></script>
+
+</head>
+<body ng-app="DemoApp">
+<table width="800" border="1" rules="all" align="center">
+    <tr class="header_footer">
+        <td colspan="2">NareshIT | Hyderabad </td>
+    </tr>
+
+    <tr height="400" class="view">
+        <td width="200px" >
+            <ul >
+                <li><a href="#!home">Home</a></li>
+                <li><a href="#!about">About</a></li>
+                <li><a href="#!contact">Contact</a></li>
+            </ul>
+        </td>
+        <td style="width: 400px;background-color: whitesmoke;text-align: center">
+            <ng-view></ng-view>
+        </td>
+    </tr>
+
+    <tr class="header_footer">
+        <td colspan="2">&copy; Copyright 2018<br>
+            Faculty | Courses | Development
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- Dependency Injection :
+        1. value : A value is used to configure and store any primitive or non-primitive type.It implements dependency injection so that
+                    you can reuse the value by injecting into any application.The value entered into the application can be shadowed.
+                              Syntax : angular.value("Name", value) ; -->
+
+<!--2.Value : Same functionality as value as defined above .Only difference is that constant cannot be shadowed i.e. it will be final
+                              Syntax : angular.constant("Name", value) ; -->
+
+<html>
+<head>
+    <title>angular.value</title>
+    <style>
+        dt{
+            font-weight: bold;
+        }
+    </style>
+    <script src="vendors/angular.js"></script>
+    <script src="js_files/angular29.js"></script>
+    <script>
+
+        // step 1 : angular.value is defined in angular29.js
+
+        var app = angular.module("DemoApp",['ValueApp']);
+        app.controller("HomeController",controller_fn);
+        function controller_fn( BasePrice) {
+            /* var this = $scope;  internally angular will write this line if we use alias name in controller
+                so no need to define '$scope' in parameter.we have to use 'this' instead of $scope we used to ...   */
+
+            // BasePrice = 56000.25;        //shadowing of value is possible
+            this.product = {id:1,name:'Mobile',price:BasePrice};
+            this.title = "Hello"
+
+        }
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController as ctrl"> <!--  valid syntax to overcome nested controller problems   -->
+    <h2>Product Details</h2>
+    <dl>
+        <dt>Product Id </dt>
+        <dd>{{ctrl.product.id}}</dd>
+        <dt>Name</dt>
+        <dd>{{ctrl.product.name}}</dd>
+        <dt>Price</dt>
+        <dd>{{ctrl.product.price}}</dd>
+    </dl>
+</body>
+</html>

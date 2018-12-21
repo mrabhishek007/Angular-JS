@@ -1,0 +1,101 @@
+<!--  Angular Filter : A filter is a function in angular js that returns a format or can sort or filter the data.Angular js provides
+      several predefined filter like uppercase,lowercase,date,number,currency,orderby,limito,etc....
+       You can create a undefined(custom) filter using a function angular.filter() -->
+
+
+
+<!--Que -> Create a sentence filter where first ofa sentence is capital letter  -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Filter</title>
+
+    <style>
+        body{
+            background-color: whitesmoke;
+            font-family: "Comic Sans MS", sans-serif;
+            color: white;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        .main{
+            position: relative;
+            width: 30%;
+            background-color: lightslategray;
+            margin: 12% auto;
+            text-align: center;
+            height: 30%;
+            box-shadow: 0 0 10px black;
+            border-radius: 5px;
+            top: -500px;
+            animation: drop 2s forwards;
+        }
+        @keyframes drop {
+            25%{
+                transform: translateY(0px);
+            }
+            50%{
+                transform: translateY(600px);
+            }
+            75%{
+                transform: translateY(550px);
+            }
+            100%{
+                transform: translateY(570px);
+            }
+        }
+        .main h3{
+            position: relative;
+            top:25px;
+        }
+        input[type="text"]{
+            width: 60%;
+            height: 19%;
+            font-weight: bold;
+            position: relative;
+            top:15px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            color: darkblue;
+        }
+        input[type="text"]::placeholder{
+            color: grey;
+            text-align: center;
+        }
+        p{
+            position: relative;
+            top: 15px;
+        }
+
+    </style>
+
+    <script src="vendors/angular.js"></script>
+    <script>
+
+        var app = angular.module("FilterApp",[]);
+
+        app.filter("SentenceCase",function () {
+           return function (string) {
+               var first_char = string.charAt(0);
+               var remaining_char = string.substring(1);
+               return first_char.toUpperCase() + remaining_char.toLowerCase() ;
+           }
+        });
+
+        app.controller("HomeController",function ($scope) {
+            $scope.msg = "";
+        });
+    </script>
+</head>
+<body ng-app="FilterApp" ng-controller="HomeController">
+    <div class="main">
+        <h3> Custom Filter </h3>
+        <br>
+        <input type="text" ng-model="msg" placeholder="Enter any Msg"><br>
+
+        <p>{{msg | SentenceCase}}   <!-- CustomFilter Applied --></p>
+    </div>
+</body>
+</html>

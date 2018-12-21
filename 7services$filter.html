@@ -1,0 +1,24 @@
+<!-- $filter service is angular service Used to apply filters dynamically such as uppercase, date, currency -->
+<!-- Syntax = $filter('filtername')(yourcontent) -->
+
+<html lang="en">
+<head>
+    <title>$filter</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("MyController",function($scope,$filter){
+            $scope.txt_name = "" ;
+
+            $scope.changeCase = function () {
+                $scope.txt_name = $filter('uppercase')($scope.txt_name) ;
+            }
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+Enter Your Name :
+<input type="text" ng-model="txt_name" ng-blur="changeCase()" placeholder="Block letters">
+</body>
+</html>

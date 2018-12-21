@@ -1,0 +1,51 @@
+<!-- Handling function while using ng-repeat -->
+
+<html lang="en">
+<head>
+    <title>Handling function while using ng-repeat</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+
+        var app = angular.module("DemoApp",[]) ; 
+        app.controller("Homecontroller",function($scope){
+            $scope.cars=[
+                {   
+                    name : "Ferrari" ,
+                    photo : "img/car2.jpg" , 
+                    like : 0,
+                    dislike : 0
+                },
+                {   
+                    name : "Range Rover" ,
+                    photo : "img/car3.jpg" , 
+                    like : 0,
+                    dislike : 0
+                }                
+            ] ; 
+            
+            $scope.likesCounter = function(current_car_obj){
+               current_car_obj.like++;
+            }
+
+            $scope.dislikeCounter = function(current_car_obj){
+                current_car_obj.dislike++;
+            }
+
+        }) ;
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="Homecontroller">
+    <div align="center" ng-repeat="car in cars" style="margin-bottom: 1px">
+        <div  style="background-color: cadetblue; color: white"  >
+                {{car.name}}
+        </div>
+        <div>
+            <img ng-src="{{car.photo}}" width="200" height="200">
+        </div>
+        <div style="background-color: cadetblue; color: white">
+            <!-- passing current obj 'car' refrence so that it can manuplated easily  -->
+             <a ng-click="likesCounter(car)"><b>Like</b> : {{car.like}}</a>&nbsp; | &nbsp;<a ng-click="dislikeCounter(car)"><b>Disike</b> : {{car.dislike}}</a>
+        </div>
+    </div>
+</body>
+</html>

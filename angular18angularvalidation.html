@@ -1,0 +1,35 @@
+<!-- Validation Using String function [verify email]-->
+<html>
+<head>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module('MyApp',[]) ;
+        app.controller("MyController",function ($scope) {
+
+            $scope.txt_email="";
+            $scope.atPos=0;
+            $scope.dotPos=0;
+            $scope.msg="";
+
+            $scope.verifyEmail = function () {
+                $scope.atPos = $scope.txt_email.indexOf('@'); //indexOf() returns -1 if string not availble otherwise returns index no
+                $scope.dotPos = $scope.txt_email.indexOf('.');
+
+                if($scope.atPos<2 | ($scope.dotPos-$scope.atPos)<3){
+                    $scope.msg= 'Invalid Email' ;
+                }else{
+                    $scope.msg = 'Email Verified' ;
+                }
+            }
+        })
+    </script>
+</head>
+<body ng-app="MyApp" ng-controller="MyController">
+<fieldset>
+    <legend>Your Email</legend>
+    <input type="text" ng-model="txt_email">
+    <button ng-click="verifyEmail()">Verify</button>
+    <span>{{msg}}</span>
+</fieldset>
+</body>
+</html>

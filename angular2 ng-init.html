@@ -1,0 +1,22 @@
+<!-- Initialization of various data types in Angular JS -->
+<!--  'ng-init' is a angular directive used to initialize a variable .variables are accessible to any element in the page i.e. variables are global  -->
+
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <script src="vendors/angular.js"></script>
+       <body ng-app>
+           <dl>   <!--  <dl> =  definition list  -->
+               <dt ng-init="name='Vikash'">String</dt>   <!--  <dt> =  definition term  -->
+               <dd>Hello! {{name}}</dd>    <!--  <dd> =  definition description  -->
+               <dt ng-init="cities=['Delhi','Patna']">Array</dt>
+               <dd>City: {{cities[1]}}</dd>
+               <dt ng-init="details={ Id:1,course:'Angular' }">Object</dt>
+               <dd>Course:&emsp;<span ng-bind=details.course></span> </dd>
+               <dt ng-init="students=[{id:1,name:'john'},{id:2,name:'rohan'}]">Array of objects</dt>
+               <dd>Student with id 2 is&emsp; {{students[1].name}} </dd>
+           </dl>
+       </body>
+   </head>
+</html>

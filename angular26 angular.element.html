@@ -1,0 +1,48 @@
+<!-- angular.bootstrap => It is an angular function used to configure angular application to DOM element explicitly.This represent
+     a lazy loading mechanism where framework is applied when it is required.It is process of converting static DOM into dynamic DOM  -->
+
+<!-- angular.element => It is an angular function that invokes Jqlite library, which is responsible for translating the DOM element into understandable
+           format of Angular framework. It is required for DOM manipulation as angular is decoupled from DOM -->
+
+
+<!-- Explicitly configuring Angular App to document ( 'dynamically enabling ng-app' )-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular.element</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+
+        var app = angular.module('DemoApp', []) ;
+
+        app.controller('HomeController', function ($scope) {
+
+            $scope.msg = "Welcome to Angular Js";
+        });
+
+
+        function enableAngular() {
+            var confMsg = confirm("Do you want to enable AngularJS");// display a pop-up box
+
+            if(confMsg){
+                angular.element(function () {
+                    angular.bootstrap( document,['DemoApp'] );  //Dynamically enabling ng-app
+
+                    //disabling a button
+                    var btn = document.querySelectorAll("button");
+                    // btn[0].style.visibility = 'hidden';
+                    btn[0].style.display = 'none';
+                });
+            }
+        }
+
+    </script>
+</head>
+<body ng-controller="HomeController">
+  <button  onclick="enableAngular()">Enable Angular</button><br><br>
+    <div>
+        {{msg}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!-- Working with ng-open ( Used to dynamically control HTML elements like dailog and details ) 
+          
+       <dialog ng-open="true/false">
+         ----------content----------
+       </dialog>
+                                                                                                   -->
+
+
+<html lang="en">
+<head>
+    <title>ng-open</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("MyHome",[]) ;
+        app.controller("myController",function($scope){
+            $scope.js = "";
+            $scope.ajs = "";
+            $scope.njs = "";
+        }) ;
+    </script>
+</head>
+<body ng-app="MyHome" ng-controller="myController">
+    
+    <input type="checkbox" ng-model="show">Show/ Hide Ads  
+     <!-- when checkbox is checked by default it provide 'true' as value otherwise false when 'unchecked' -->
+
+    <dialog ng-open="show">   <!-- ng-open ="true" when checkbox is checked show dialog will be visible -->   
+        <img ng-src="img/pepsi.jpg" width="auto" height="100">
+    </dialog>
+
+    <table width="600" height="400" border="1" align="center" cellpadding="4" cellspacing="4">
+        <tr height="400" width="200">
+            <td>
+            <ul>
+                <li>
+                    <input type="checkbox" ng-model="js" >Javascript
+                </li>
+                <li>
+                    <input type="checkbox" ng-model="ajs">Angular.js
+                </li>
+                <li>
+                    <input type="checkbox" ng-model="njs">Node.js 
+                </li>
+            </ul>
+            </td>
+       
+            <td>
+                <details ng-open="js"> <!-- ng-open = "true" then the summary will be extended -->
+                    <summary> Javascript </summary>
+                        <ol>
+                            <li>Variables</li>
+                            <li>DatTypes</li>
+                            <li>Operator</li>
+                        </ol>
+                </details>
+
+                <details ng-open="ajs"  > 
+                    <summary >  Angular JS </summary>  
+                        <ol>
+                            <li>Directive</li>
+                            <li>Filter</li>
+                            <li>Service</li>
+                        </ol> 
+                </details>         
+
+                <details ng-open="njs"  >                    
+                    <summary > Node.js</summary>  
+                        <ol>
+                            <li>Routing</li>
+                            <li>File System</li>
+                            <li>Http</li>
+                        </ol>
+                </details>
+           </td>
+       </tr>
+    </table>
+</body>
+</html>

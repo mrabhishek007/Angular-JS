@@ -1,0 +1,60 @@
+<!-- Input state validation are the angular services that we use to validate every field eventually
+      They are : $dirty,$pristine,$valid,$invalid,$touched,$untouched,$error-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Input State Validation</title>
+    <style>
+        legend,dt{
+            font-weight: bold;
+        }
+    </style>
+    <script src="vendors/angular.js"></script>
+</head>
+
+<body ng-app>
+<form name="frmName">
+    <fieldset>
+        <legend>Login Page</legend>
+        <dl>
+            <dt>Enter your Name</dt>
+            <dd >
+                <input type="text" required ng-minlength="4" ng-maxlength="14" ng-model="txt_Name" name="txtName">
+            </dd>
+        </dl>
+    </fieldset>
+</form>
+
+<fieldset>
+    <legend>Input State</legend>
+    <dl>
+        <dt>Name Not yet modified</dt>
+        <dd>{{frmName.txtName.$pristine}}</dd>
+        <dt>Name modified </dt>
+        <dd>{{frmName.txtName.$dirty}}</dd>
+        <dt>Name valid </dt>
+        <dd>{{frmName.txtName.$valid}}</dd>
+        <dt>Name invalid </dt>
+        <dd>{{frmName.txtName.$invalid}}</dd>
+        <dt>Name touched </dt>
+        <dd>{{frmName.txtName.$touched}}</dd>
+        <dt>Name not-touched </dt>
+        <dd>{{frmName.txtName.$untouched}}</dd>
+        <dt>Validation Error</dt>
+        <dd>
+            <span ng-show="frmName.txtName.$error.required">
+                Required Error
+            </span>
+            <span ng-show="frmName.txtName.$error.minlength">
+                Min Length error
+            </span>
+            <span ng-show="frmName.txtName.$error.maxlength">
+                Max Length error
+            </span>
+        </dd>
+    </dl>
+</fieldset>
+
+</body>
+</html>

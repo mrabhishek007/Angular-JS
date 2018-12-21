@@ -1,0 +1,45 @@
+<!-- Form State Validation verifies the complete state of the form in the webpage by using
+     these services : $pristine,$dirty,$invalid,$valid,$submitted
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form state validation</title>
+    <style>
+        legend,dt{
+            font-weight: bold;
+        }
+    </style>
+   <script src="vendors/angular.js"></script>
+</head>
+<body ng-app>
+<form name="frmregister">
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text"ng-maxlength="10" ng-model="txtName" ></dd>
+
+        <dt>Email</dt>
+        <dd><input type="email" ng-model="txtEmail"></dd>
+    </dl>
+    <input type="submit" value="Submit" ng-disabled="frmregister.$invalid">
+</form><br>
+
+<fieldset>
+    <legend>Form State</legend>
+    <dl>
+        <dt>No Fields Modified yet</dt>
+        <dd>{{frmregister.$pristine}}</dd>
+        <dt>One or more fields modified</dt>
+        <dd>{{frmregister.$dirty}}</dd>
+        <dt>All fields are valid</dt>
+        <dd>{{frmregister.$valid}}</dd>
+        <dt>One or more fields are invalid</dt>
+        <dd>{{frmregister.$invalid}}</dd>
+        <dt>Form Submitted</dt>
+        <dd>{{frmregister.$submitted}}</dd>
+    </dl>
+</fieldset>
+
+</body>
+</html>

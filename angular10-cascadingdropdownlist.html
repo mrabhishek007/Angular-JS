@@ -1,0 +1,107 @@
+<!-- Cascading drop down list (Adding options into drop-down dynamicalaly ) -->
+
+<html lang="en">
+<head>
+    <title>Cascading Drop down</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app =angular.module("MyApp",[]) ; 
+        app.controller("HomeController",function($scope){
+            $scope.categories = ['Electronics','Shoes'] ; 
+            $scope.Electronics = ['Samsung Tv','Google pixel'] ; 
+            $scope.Shoes = ['Nike Shoe','Brooke Shoe'] ;
+            $scope.lstcategories="";
+            $scope.lstproducts="";
+            $scope.products=[];
+            $scope.isHide=true ;
+            
+            $scope.selectCategory = function(){
+                $scope.isHide=true;
+                switch($scope.lstcategories){
+                    case "Electronics":
+                        $scope.products = $scope.Electronics ;
+                        break;
+                    case "Shoes":
+                        $scope.products = $scope.Shoes ; 
+                        break;
+                }
+                
+            } ;
+
+            $scope.productDetails = [
+                {
+                    Name:"Samsung Tv",
+                    price:95000.53,
+                    photo:"img/tv.jpg"
+                },
+                {
+                    Name:"Google Pixel",
+                    price:45000.00,
+                    photo:"img/pixel.jpg"
+                },
+                {
+                    Name:"Nike Shoe",
+                    price:7500,
+                    photo:"img/nike1.jpg"
+                },
+                {
+                    Name:"Brooke Shoe",
+                    price:800,
+                    photo:"img/shoe.jpg"
+                }
+            ]
+
+            function getDetails(indexNo){
+                $scope.prodName = $scope.productDetails[indexNo].Name ; 
+                $scope.prodPrice = $scope.productDetails[indexNo].price ;
+                $scope.prodPhoto = $scope.productDetails[indexNo].photo ; 
+            }
+
+            $scope.selectProducts = function(){
+                switch($scope.lstproducts){
+                    case "Samsung Tv":
+                        getDetails(0);
+                        break;
+                    case "Google pixel":
+                        getDetails(1);
+                        break;
+                    case "Nike Shoe":
+                        getDetails(2);
+                        break;
+                    case "Brooke Shoe":
+                        getDetails(3);
+                        break;
+                }
+                $scope.isHide=false ; 
+            } ;
+        }) ; 
+    </script>
+</head>
+<body ng-app="MyApp" ng-controller="HomeController">
+    <table width="500" border="2" cellspacing="3" cellpadding="3" >
+        <caption>Shopping Cart</caption>
+        <tr>
+            <td>
+                Select a category<br>
+                <select ng-options="item for item in categories" ng-model="lstcategories" ng-change="selectCategory()"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Select a product<br>
+                <select ng-options="item for item in products" ng-model="lstproducts" ng-change="selectProducts()"></select>
+            </td>
+        </tr>
+        <tr ng-hide="isHide">
+            <td>
+                <h2 align=center>Product Details</h2>
+                <label>Name:</label>{{prodName}}<br>
+                <img height="200" width="200" ng-src="{{prodPhoto}}" style="margin: 5px"><br>
+                <label>Price:</label>&#8377; {{prodPrice}}<br>
+                <label>Quantity: </label><input type=number ng-model="qnty" ng-init="amount=0" ng-change="amount=(qnty*prodPrice)" max="10" min="1" value="1" ><br>
+                <span>Total Amount :&#8377; {{amount}} </span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

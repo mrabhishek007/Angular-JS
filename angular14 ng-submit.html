@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <title>ng-submit</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+     var app = angular.module("DemoApp",[]);
+     app.controller("MyController",function($scope){
+
+    $scope.submitForm = function(userData){
+
+        $scope.name = userData.name ; 
+        $scope.age = userData.age ; 
+        $scope.gender = userData.gender ; 
+    
+    }
+
+     });
+    
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+    <form ng-submit="submitForm(user)"  >
+        <dl>
+            <dt>UserName</dt>
+            <dd><input type="text" ng-model="user.name"></dd>
+            <dt>Age</dt>
+            <dd><input type="number" ng-model="user.age"></dd>
+            <dt>Gender</dt>
+            <dd>
+                <input type="radio" value="Male" name="Gender" ng-model="user.gender"><span>Male</span>
+                <input type="radio" value="Female" name="Gender" ng-model="user.gender"><span>Female</span>
+            </dd>
+        </dl>
+        <button>Submit Details</button>
+
+        <h3>User Details</h3>
+         Name : {{name}}<br>
+         Age : {{age}}<br>
+         Gender : {{gender}}
+    </form>
+</body>
+</html>

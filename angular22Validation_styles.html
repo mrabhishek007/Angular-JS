@@ -1,0 +1,29 @@
+<!-- It is predefined validation styles that you can configure it any application so that the styles
+     are applied dynamically to input element based on form-state or input-state.The pre-defined styles
+     are => [ Input field styles : ng-untouched,ng-touched,ng-dirty,ng-valid,ng-invalid ]
+            [ Form field styles : ng-pristine,ng-dirty,ng-valid,ng-invalid ]                            -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input.ng-invalid{
+            background-color: lightcoral;
+            color: white;
+        }
+        input.ng-valid{
+            background-color: green;
+            color: white;
+        }
+
+    </style>
+    <title>Angular validation styles</title>
+    <script src="vendors/angular.js"></script>
+</head>
+<body ng-app>
+    <form name="frmName">
+        User Name :
+        <input type="text" name="txtName" ng-model="txtName" required>
+    </form>
+</body>
+</html>

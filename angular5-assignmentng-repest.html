@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <title>Assignment</title>
+    <script src='vendors/angular.js'></script>
+    <script>
+        var app = angular.module('TestApp',[]) ; 
+        app.controller('homecontroller',function($scope){
+
+            $scope.topics = [
+                {
+                    "Title" : "JavaScript",
+                    "Contents" : [ "Operators" , "Variables" ] 
+                },
+
+                {
+                    "Title" : "Angular Js",
+                    "Contents" : [ "Directives" , "Services" ]                     
+                }
+            ]
+        }) ; 
+    </script>
+</head>
+<body ng-app="TestApp" ng-controller="homecontroller">
+
+    <dl ng-repeat="sub in topics" >
+        <dt > {{sub.Title}}
+            <dd>
+                <ol >
+                    <li ng-repeat="cont in sub.Contents">
+                        {{cont}}
+                    </li>
+                </ol>
+            </dd>
+        </dt>
+    </dl>
+    
+</body>
+</html>

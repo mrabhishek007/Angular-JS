@@ -1,0 +1,31 @@
+<!-- A service is a predefined business logic that provides static functionality.It is a collection of factories...-->
+
+<html>
+<head>
+    <title>Custom Services</title>
+    <script src="vendors/angular.js"></script>
+    <script src="js_files/captcha_app_ang31.js"></script>
+    <script>
+        var app = angular.module("DemoApp",["CaptchaApp"]);
+        app.controller('HomeController', function ($scope,CaptchaService) {
+            $scope.captcha = CaptchaService.captcha();
+            $scope.refresh = function () {
+                $scope.captcha = CaptchaService.captcha();
+            }
+        });
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController">
+    <form>
+        <dl>
+            <dt>UserName</dt>
+            <dd> <input type="text"> </dd>
+            <dt>Password</dt>
+            <dd> <input type="password"></dd>
+            <dt>Enter Code</dt>
+            <dd> <input type="text" size="5"> &nbsp;&nbsp;<input type="button" value="Refresh" ng-click="refresh()"></dd>
+            <dd>{{captcha}}</dd><br>
+        </dl>
+    </form>
+</body>
+</html>

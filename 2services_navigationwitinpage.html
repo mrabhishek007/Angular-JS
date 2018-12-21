@@ -1,0 +1,138 @@
+<!--Navigation within page using Hash-->
+<!--In html navigation can be done using "url?#id_name" similar functionality can be achieved in angular using $studLoc.hash(id_name)-->
+<!-- '$studLoc.hash()' is used to set or get the named studLoc in current page -->
+<html lang="en">
+<head>
+
+    <style>
+        *{
+            font-family: "Comic Sans MS", sans-serif;
+        }
+    </style>
+
+    <title>$location.hash()</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("MyApp",[]) ;
+        app.controller("HomeController",function($scope,$location,$anchorScroll){
+
+            //$anchorScroll is a angular service which provides  scrolling ability to scroll from one module to another in an page
+
+            $scope.detailsArray = [];
+
+            $scope.jsClick = function () {
+                $location.hash("javascript");     /* 'js' is id for Javascript in html */
+                updateRecentDetails();
+
+            }
+
+            $scope.jqClick = function () {
+                $location.hash('jquery');
+                updateRecentDetails();
+
+            }
+
+            $scope.nodeClick = function () {
+                $location.hash('node');
+                updateRecentDetails();
+
+            }
+
+            $scope.angularClick = function () {
+                $location.hash('angular');
+                updateRecentDetails();
+
+            }
+
+            $scope.imgClick = function () {
+                $location.hash("poster");
+                updateRecentDetails();
+
+            }
+
+            $scope.moveToTop = function () {
+                $location.hash("toc");
+                updateRecentDetails();
+            }
+
+            function updateRecentDetails(){
+                //$studLoc.hash() will get the recent hash studLoc
+                $scope.detailsArray.push($location.hash());
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="MyApp" ng-controller="HomeController">
+
+<h1 id="toc">Table of Contents
+
+    <ol type="i">
+        <li><a href="" ng-click="jsClick()">JavaScript</a></li>
+        <li><a href="" ng-click="jqClick()">Jquery</a></li>
+        <li><a href="" ng-click="nodeClick()">Node</a></li>
+        <li><a href="" ng-click="angularClick()">Angular</a></li>
+        <li><a href="" ng-click="imgClick()">Image</a></li>
+    </ol><br>
+
+    <input type="checkbox"  ng-model="show">Recently Viewed
+    <dialog ng-open="show">
+        <h5>Recently Viewed</h5>
+        <ol>
+            <li ng-repeat="detail in detailsArray track by $index">{{detail}}</li>
+            <!--track by index allows duplicate values-->
+        </ol>
+    </dialog>
+
+</h1>
+
+<img src="img/up.png" ng-click="moveToTop()" style="background-color: white; width: 50px;" >
+<h2 id="javascript">JavaScript Basics</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+
+<img src="img/up.png" ng-click="moveToTop()" style="background-color: white; width: 50px;" >
+<h2 id="jquery">Jquery </h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque blanditiis, delectus dicta doloribus ducimus error esse, est excepturi fuga fugit in labore necessitatibus nobis odio omnis quas ratione repellendus sequi soluta tenetur veniam voluptatem voluptates. Natus nostrum rerum voluptate!</p>
+
+<img src="img/up.png" ng-click="moveToTop()" style="background-color: white; width: 50px;" >
+<h2 id="angular">Angular</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+
+<img src="img/up.png" ng-click="moveToTop()" style="background-color: white; width: 50px;" >
+<h2 id="node">Node</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci aut, blanditiis consequuntur cumque, debitis deserunt dolor dolorem doloribus eligendi enim et explicabo, laborum magnam maxime nam natus numquam quae quas quasi ratione reiciendis reprehenderit saepe sequi sit suscipit veniam?</p>
+<br><br><br>
+
+<img src="img/up.png" ng-click="moveToTop()" style="background-color: white; width: 50px;" >
+<figure id="poster">
+    <img src="img/antman.jpg" width="440" height="440" alt="Antman">
+    <figcaption>ANTMAN</figcaption>
+
+</figure>
+
+</body>
+</html>

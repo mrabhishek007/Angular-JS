@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node.js_Angular</title>
+    <script src="./angular.js"></script>
+    <script>
+        var app = angular.module("MyApp",[]);
+        app.controller("HomeController", function($scope, $http){
+            $http.get('/getProducts').then((response)=>{
+                $scope.products = response.data ; 
+                console.log($scope.products)
+            });
+        });
+    </script>
+</head>
+<body ng-app="MyApp" ng-controller="HomeController">
+    <div style="margin-top: 100px">
+        <h2 align="center"> Product Details </h2>
+        <table width="400px" height="300px" align="center" rules="all" border="2px">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            <tr align="center" ng-repeat="item in products">
+                <td>{{item.Name}}</td>
+                <td>{{item.Price}}</td>
+            </tr>  
+        </table>
+    </div>
+</body>
+</html>

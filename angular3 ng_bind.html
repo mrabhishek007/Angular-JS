@@ -1,0 +1,20 @@
+<!-- Representing the ng-bind-html (It allows markup and function to format the data automatically )-->
+
+<html lang="en" >
+<head >
+    <title>Using ng-bind-html</title>
+    <script src='vendors/angular.js'> </script>
+    <script src='vendors/angular-sanitize.js'> </script>
+    <script>
+         var app = angular.module('DemoApp',['ngSanitize'])   // Multiple inheritence (ng-bind-html is in sanitize package)
+    </script>   
+</head >
+<body ng-app="DemoApp" ng-cloak >                    <!-- ng-cloak prevents page flickering.it won't lod the page until angular will take control over a directory -->
+    <div>Your Name :
+        <input type="text" ng-model="msg" >
+        <br>
+        <span ng-bind-html="msg.fontcolor('green')">        <!-- html is applied here dynamically which is not possible with ng-bind -->
+        </span>    
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--  angular.copy - It is an angular function used to create a duplicate copy of data object.It can also
+create a shallow copy that comprises of the properties contained in the data object  -->
+
+<html>
+<head>
+    <title>angular.copy</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("HomeController", function ($scope) {
+
+                $scope.dataReplica = {};
+
+                $scope.submitDetails = function (product) {
+                    angular.copy(product,$scope.dataReplica);
+                }
+
+
+        });
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController" >
+<form ng-submit="submitDetails(product)">
+    <h3>Product Details</h3>
+    <dl>
+        <dt>Name</dt>
+        <dd><input type="text" ng-model="product.name"></dd>
+        <dt>Price</dt>
+        <dd><input type="number" ng-model="product.price"></dd>
+        <dt>In Stock</dt>
+        <dd>
+            <input type="radio" name="stock" value="instock" ng-model="product.stock">Yes
+            <input type="radio" name="stock" value="outofstock" ng-model="product.stock">No
+        </dd>
+        <dt><input type="submit" value="Submit"></dt>
+    </dl>
+</form>
+<div>
+    <p>{{dataReplica}}</p>
+</div>
+</body>
+</html>

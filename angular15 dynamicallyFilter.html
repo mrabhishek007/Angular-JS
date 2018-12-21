@@ -1,0 +1,91 @@
+<!-- filter - It is an angular directive used to search for any value in a collection and return one or multiple values that are matching with the search string -->
+
+<html lang="en">
+<head>
+   <style>
+   *{
+    font-family: Helvetica Neue, arial;
+    }
+   </style>
+    <title>Filter</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+     var app = angular.module("DemoApp",[]);
+     app.controller("MyController",function($scope){
+
+        $scope.products=[
+            {
+                id:1,
+                name:"Samsung Tv",
+                price:3500.56,
+                mfd:new Date("2014/07/22"),
+                photo:"img/tv.jpg"
+            },
+            {
+                id:3,
+                name:"Car",
+                price:15000000.36,
+                mfd:new Date("2018/01/22"),
+                photo:"img/car2.jpg"
+            },
+            {
+                id:2,
+                name:"Shoe",
+                price:1533.95,
+                mfd:new Date("2015/03/06"),
+                photo:"img/shoe.jpg"
+            },            
+        ]
+
+     });
+    
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+
+    <div style="margin-bottom: 20px; width: 30%"  >
+        <fieldset>
+            <legend>Filter Products </legend>
+            <dl>
+                <dt>Search all Fields</dt>
+                <dd><input type="text" ng-model="search.$"></dd>
+                <dt>Search By Name</dt>
+                <dd><input type="text" ng-model="search.name"></dd>
+                <dt>Search bY Mfd</dt>
+                <dd><input type="text" ng-model="search.mfd"></dd>
+                <dt>Products per page</dt>
+                <dd><input type="number" ng-model="records"></dd>   
+            </dl>
+        </fieldset>
+    </div>
+
+    <table border="1" width="600"  frame="box" allign="center" cellsapcing="3" cellpadding="10">
+        <tr ng-repeat=" item in products | filter:search | limitTo:records |orderBy:'id' " > <!-- Using filters inside ng-repeat -->
+            <td>
+                <img ng-src={{item.photo}} width="200" height="200">
+            </td>
+            <td>
+                <table rules="rows" frame="box" align="center" cellpadding="5">
+                    <tr>
+                        <td>Product Id</td>
+                        <td>{{item.id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{item.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Manufactured on </td>
+                        <td>{{item.mfd | date}}</td>   <!-- Defines date(Filters) -->
+                    </tr>
+                    <tr>
+                        <td>Price  </td>
+                        <td>{{item.price |currency:'&#8377;'}}</td>  <!-- Defines currency(Filters) -->
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

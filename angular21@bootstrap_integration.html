@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Integration</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="vendors/angular.js"></script>
+</head>
+<body ng-app>
+<div class="container">
+    <h2>Register User</h2>
+    <form name="frmRegister" novalidate>
+
+        <div class="form-group" ng-class="{'has-error':frmRegister.txtName.$invalid}">
+            <label for="txtName" class="col-sm-3 control-label">User Name</label>
+            <div >
+                <input class="form-control" type="text" name="txtName" required ng-model="txtName" ng-minlength="4" ng-maxlength="15">
+                <div class="text-danger">
+                    <span ng-if="frmRegister.txtName.$error.required">Name Required</span>
+                    <span ng-if="frmRegister.txtName.$error.minlength">Name too short...</span>
+                    <span ng-if="frmRegister.txtName.$error.maxlength">Name too long...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error':frmRegister.txtEmail.$invalid}">
+            <label for="txtEmail" class="col-sm-3 control-label">Email</label>
+            <div >
+                <input class="form-control" type="email" name="txtEmail" ng-model="txtEmail" required>
+                <div class="text-danger">
+                    <span ng-if="frmRegister.txtEmail.$error.required">Email Required</span>
+                    <span ng-if="frmRegister.txtEmail.$error.email">Invalid Email</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <button ng-disabled="frmRegister.$invalid" class="btn btn-primary btn-block">Register</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

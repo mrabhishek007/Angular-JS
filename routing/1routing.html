@@ -1,0 +1,80 @@
+<!-- Routing configuration with template to render -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Routing</title>
+    <style>
+        *{
+            font-family: "Comic Sans MS", sans-serif;
+            color: forestgreen;
+        }
+        tr{
+            background-color: lightseagreen;
+        }
+        a{
+            text-decoration: none;
+            color: #2a6496;
+        }
+        table{
+            box-shadow: 0 0 10px black ;
+        }
+
+    </style>
+    <script src="../vendors/angular.js"></script>
+    <script src="../vendors/angular-route.js"></script>
+    <script>
+        var app = angular.module("MyApp",["ngRoute"]);
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/',{
+                template:"<h2>Tutorial Home</h2>"
+                })
+                .when('/js',{
+                    template:"<h2>javascript</h2>" +
+                        "<ol>" +
+                        "<li>Asynchronus Js</li>" +
+                        "<li>Synchronus Js</li>" +
+                        "</ol> "
+                })
+                .when('/ng',{
+                    template:"<h2>Angular Js</h2>" +
+                        "<ol>" +
+                        "<li>Directives</li>" +
+                        "<li>Services</li>" +
+                        "</ol> "
+                })
+                .otherwise({
+                    template:"<h2>Page Not Found</h2>"
+                })
+        })
+
+        app.controller("MyController",function ($scope) {
+            $scope.title="Online Tutorials"
+        })
+
+
+    </script>
+</head>
+<body ng-app="MyApp" ng-controller="MyController">
+<table width="600" border="1" cellspacing="0" align="center">
+    <tr>
+        <td colspan="2" align="center">{{title}}</td>
+    </tr>
+    <tr height="500" style="background-color: whitesmoke;">
+        <td width="200">
+            <ul>
+                <li ><a href="#!ng">Angular Js</a></li>
+                <li><a href="#!js">Javascript</a></li>
+            </ul>
+        </td>
+        <td>
+            <ng-view align="center"></ng-view>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">Copyright<sup>&copy</sup> 2018</td>
+    </tr>
+</table>
+</body>
+</html>

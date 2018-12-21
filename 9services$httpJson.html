@@ -1,0 +1,56 @@
+<!-- Fetch data from JSON using API -->
+
+<html lang="en">
+<head>
+
+    <title>$http json</title>
+    <style>
+        th,td{
+            color:white;
+            text-align: center;
+            background-color: lightslategray;
+        }
+        th{
+            background-color: lightseagreen;
+        }
+        h3{
+            background: linear-gradient(lightgray,lightcoral);
+            color: white;
+        }
+        th,td:hover{
+            font-weight: bold;
+        }
+    </style>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("MyController",function($scope,$http){
+            $scope.products =[] ;
+
+            $http.get('api/products.json')
+                .then(function onSucess(response){
+                    $scope.products = response.data;
+                }
+                )
+        });
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController" align="center">
+
+<h3 width="100%">Product Catalog Using JSON</h3>
+
+<table align="center" width="50%" border="1px" rules="all">
+    <tr>
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr ng-repeat="item in products">
+        <td>{{item.id}}</td>
+        <td>{{item.Name}}</td>
+        <td>{{item.Price | currency:'&#8377':1}}</td>
+    </tr>
+
+</table>
+</body>
+</html>

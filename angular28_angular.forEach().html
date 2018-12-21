@@ -1,0 +1,45 @@
+ <!-- angular.forEach() -> It is an angular function used to perform an iteration over an collection & read all the values & keys
+     so that they can be appended into a collection -->
+
+ <!-- These are some functions used to verify the data types in angular : angular.isArray(), angular.isObject(), angular.isDate(), angular.isString(), angular.isNumber() -->
+
+<html>
+<head>
+    <script src="vendors/angular.js"></script>
+    <title>angular.forEach()</title>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("DemoController",function ($scope) {
+
+            var productObj = [{
+                "Name":"TV",
+                "Brand":"SAMUSUNG",
+                "Price":26000
+            },{
+                "Name":"SHOE",
+                "Brand":"NIKE",
+                "Price":5300
+            }, {
+                "Name":"MOBILE",
+                "Brand":"APPLE",
+                "Price":79000
+            }];
+
+            $scope.newProduct=new Array();
+
+            angular.forEach(productObj, function (values , keys) {
+
+                $scope.newProduct.push(values.Name);
+            });
+        });
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="DemoController">
+    <div>
+        <h3>Product List</h3>
+        <ol>
+            <li ng-repeat="item in newProduct">{{item}}</li>
+        </ol>
+    </div>
+</body>
+</html>

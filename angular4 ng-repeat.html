@@ -1,0 +1,44 @@
+ <!-- ng-repeat (Used to repeat any html element until the given expression stops yielding the result    [ 'in' operator used ])  -->
+
+ <html lang="en">
+ <head>
+     <title>Representing ng-repeat</title>
+     <script src='vendors/angular.js'> </script>
+ </head>
+ <body ng-app ng-cloak>
+     
+    <div ng-init="cities=['Mumbai','Delhi','Pune','Shimla']">
+         <h2>Repeating List items</h2>
+         <ol>  <!-- Ordered list -->
+             <li ng-repeat='city in cities'>  <!-- ng-repeat will access every element from collection i.e. array and store it n a refrence -->
+                {{city}}
+             </li>
+         </ol>
+     </div>
+
+      <div ng-init="products= [{id:1,name:'Shoe'},{id:2,name:'Bangles'}]">
+            <h2>Repeating Rows</h2>
+            <table width="400" border="1">
+                <th>Product Id</th>
+                <th>Name</th>
+                <tr ng-repeat="items in products">
+                    <td>{{items.id}}</td>
+                    <td>{{items.name}}</td>
+                </tr>
+            </table> 
+      </div>
+
+      <div ng-init="amazon=[{category:'Electronics',product:['TV','Mobiles']},{category:'Footwares',product:['nike','addidas']}]">
+          <h2>Nested ng-init</h2>
+          <ol >
+              <li ng-repeat="obj in amazon">{{obj.category}}
+                    <ul >
+                        <li ng-repeat="item in obj.product">{{item}}</li>
+                    </ul>
+              </li>
+          </ol>
+      </div>
+
+
+ </body>
+ </html>

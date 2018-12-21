@@ -1,0 +1,82 @@
+<!-- A factory is a collection of functions. The functions in a factory are injected into any application & are accessible by using
+     Single call mechanism.Single call requires the reference to call the functions everytime.Hence it is recommended to use a service...   -->
+
+<html>
+<head>
+    <title>Custom Factories</title>
+    <script src="vendors/angular.js"></script>
+    <script src="js_files/angular30.js"></script>
+    <script>
+        var app =angular.module("DemoApp",['FactoryApp']);
+        app.controller("HomeController",function ($scope,MathFactory,StringFactory) {
+            var title = "product details"
+            $scope.title = StringFactory.changeCase(title);
+
+            $scope.products = [
+                {
+                    "Name":"Samsung TV",
+                    "Price":56001.36,
+                    "Quantity":3,
+                    "Amount": () => calculateAmount(0)  //returning amount (Arrow function)
+                },
+                {
+                    "Name":"Golden Sofa",
+                    "Price":226001.76,
+                    "Quantity":1,
+                    "Amount": () => calculateAmount(1)
+                },
+                {
+                    "Name":"LG Freeze",
+                    "Price":33655.13,
+                    "Quantity":25,
+                    "Amount": () => calculateAmount(2)
+                }
+            ];
+
+            function calculateAmount(index){
+                var quantity = $scope.products[index].Quantity;
+                var price = $scope.products[index].Price;
+                return MathFactory.totalAmount(quantity, price);
+            }
+
+            var amount = [];
+            var price =[];
+            $scope.products.forEach(function (value,index,array) {
+                amount.push(value.Amount());
+                price.push(value.Price);
+            });
+            $scope.maxAmount = MathFactory.maxvalue(...amount); //passing array value into a spread operator
+            $scope.maxPrice = MathFactory.maxvalue(...price);
+        })
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="HomeController">
+    <h2 align="center">{{title}}</h2>
+    <table width="600px" border="1" align="center">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+        </tr>
+        <tr ng-repeat="item in products" align="center">
+            <td>{{item.Name}}</td>
+            <td>{{item.Price}}</td>
+            <td>{{item.Quantity}}</td>
+            <td>{{item.Amount() | currency :'&#8377;' :1}}</td>
+        </tr>
+    </table><br>
+
+    <table width="300" border="2" align="center">
+        <tr>
+            <td>Product Max Price</td>
+            <td>{{maxPrice | currency: '&#8377;' :1}}</td>
+        </tr>
+        <tr>
+            <td>Product Max Amount</td>
+            <td>{{maxAmount |currency: '&#8377;' :1}}</td>
+        </tr>
+    </table>
+
+</body>
+</html>

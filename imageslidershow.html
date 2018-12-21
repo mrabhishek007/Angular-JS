@@ -1,0 +1,75 @@
+<!--Image slide show using $interval-->
+
+<html lang="en">
+<head>
+    <title>ImageSlideShow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app = angular.module("DemoApp",[]);
+        app.controller("MyController",function($scope,$interval){
+
+            var count=1;
+            var imgInterval ="";
+            $scope.play_btn =true;
+            $scope.img = [ {name:'car1.jpg',id:'img/car1.jpg'},{name:'car2.jpg',id:'img/car2.jpg'},{name:'car3.jpg',id:'img/car3.jpg'},{name:'nikeshoe.jpg',id:'img/nike1.jpg'}] ;
+
+            $scope.setImage = $scope.img[0];
+
+             function slideShow () {
+
+                imgInterval =  $interval(function () {
+
+                 if(count === $scope.img.length){
+                    count=0;
+                 }
+                 $scope.setImage = $scope.img[count];
+
+                count++ ;
+                },1000) ;
+            }
+
+            slideShow();
+
+            $scope.startSlideShow = function () {
+                slideShow() ;
+                $scope.play_btn = !$scope.play_btn ;
+
+                if(count === $scope.img.length){
+                    count=0;
+                }
+                $scope.setImage = $scope.img[count];
+                count++ ;
+
+            }
+
+            $scope.stopSlideShow = function () {
+                 $interval.cancel(imgInterval);
+                 $scope.play_btn = !$scope.play_btn ;
+
+            }
+
+        });
+
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+    <table rules="all" border="1" width="95%%" align="center" height="600">
+        <tr>
+            <td align="center" style="font-weight: bold">{{setImage.name}}</td>
+        </tr>
+        <tr  align="center"  >
+            <td >
+                <img height="550" width="850" ng-src={{setImage.id}}>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a> <i style="font-size:24px" ng-click="startSlideShow()" class="fa" ng-show="!play_btn">&#xf04b;</i> </a>
+                <a><i ng-click="stopSlideShow()" style="font-size:24px"  ng-show="play_btn" class="fa">&#xf04c;</i></a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

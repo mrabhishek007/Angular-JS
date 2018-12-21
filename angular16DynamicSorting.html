@@ -1,0 +1,95 @@
+<!-- orderBy - It is an angular directive used to display the contents from a collectiondynamically in ascending or descending order -->
+
+
+<html lang="en">
+<head>
+   <style>
+   *{
+    font-family: Helvetica Neue, arial;
+    }
+   </style>
+    <title>Dynamic Sorting</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+     var app = angular.module("DemoApp",[]);
+     app.controller("MyController",function($scope){
+
+        $scope.products=[
+            {
+                id:1,
+                name:"Samsung Tv",
+                price:3500.56,
+                mfd:new Date("2014/07/22"),
+                photo:"img/tv.jpg"
+            },
+            {
+                id:3,
+                name:"Car",
+                price:15000000.36,
+                mfd:new Date("2018/01/22"),
+                photo:"img/car2.jpg"
+            },
+            {
+                id:2,
+                name:"Shoe",
+                price:1533.95,
+                mfd:new Date("2015/03/06"),
+                photo:"img/shoe.jpg"
+            },            
+        ]
+
+     });
+    
+    </script>
+</head>
+<body ng-app="DemoApp" ng-controller="MyController">
+    <fieldset style="width: 30% " >
+        <legend> Sorting </legend>
+        <dl>
+            <dt>Sort Products</dt>
+            <dd>
+                <select ng-model="sort">
+                    <option value="" selected style="display:none">Choose One</option>
+                    <option value="id">Order By Id</option>
+                    <option value="price">Order By Price</option>
+                    <option value="mfd">Order By Manufacture</option>
+                </select>
+                <input type="checkbox" ng-model="reverse">Reverse  <!-- Checkbox will give boolean value -->
+            </dd>
+        </dl>
+    </fieldset>
+
+    <table border="1" width="600"  frame="box" allign="center" cellsapcing="3" cellpadding="10">
+            <tr ng-repeat=" item in products | orderBy:sort:reverse  " > <!-- Using filters inside ng-repeat -->
+                <td>
+                    <img ng-src={{item.photo}} width="200" height="200">
+                </td>
+                <td>
+                    <table rules="rows" frame="box" align="center" cellpadding="5">
+                        <tr>
+                            <td>Product Id</td>
+                            <td>{{item.id}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{item.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Manufactured on </td>
+                            <td>{{item.mfd | date}}</td>   <!-- Defines date(Filters) -->
+                        </tr>
+                        <tr>
+                            <td>Price  </td>
+                            <td>{{item.price |currency:'&#8377;'}}</td>  <!-- Defines currency(Filters) -->
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+
+
+</body>
+</html>

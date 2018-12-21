@@ -1,0 +1,28 @@
+<!-- Angular provides directive to extend HTML to make it more declarative.
+     Directive is a function that can return and extend markups.
+     You can create a custom directive by using a function called 'angular.directive()'..
+       Syntax :: angular.directive(dirName, function(){ }); where ' dirName '  must be in camel case to get normalization benefit -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Directive</title>
+    <script src="vendors/angular.js"></script>
+    <script>
+        var app =angular.module("DirectiveApp",[]);
+        app.directive("myLogin",function () {
+            var directive  = {};
+            directive.templateUrl = "angular9login.html";
+            directive.restrict="E"; // restrict functionality as element
+            return directive;
+        })
+    </script>
+</head>
+<body ng-app="DirectiveApp">
+    <h2>Login Page</h2>
+    <my-login></my-login>
+    {{myLogin}}
+    <div ng-class="ng-login"></div>
+
+</body>
+</html>
